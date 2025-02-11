@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>WebSocket Product Notifications</title>
+</head>
+<body>
+    <h2>Уведомления о новых продуктах:</h2>
+    <div id="notifications"></div>
+
+    <script>
+        // Открываем WebSocket-соединение
+        const socket = new WebSocket("ws://" + window.location.host + "/ws/notify/");
+
+        // При получении сообщения от WebSocket
+        socket.onmessage = function(e) {
+            const data = JSON.parse(e.data);
+            const notificationsDiv = document.getElementById("notifications");
+            notificationsDiv.innerHTML += `<p>${data.message}</p>`;
+        };
+
+        // Обрабатываем ошибки соединения
+        socket.onerror = function(error) {
+            console.error("WebSocket Error: ", error);
+        };
+    </script>
+</body>
+</html>
