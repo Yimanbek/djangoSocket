@@ -28,7 +28,7 @@ class ProductViewSet(ModelViewSet):
             {
                 "type": "send_notification",
                 "text": {
-                    "message": f"New product created: {instance.name}"
+                    "message": f"New product created: {instance.name}, category: {instance.category}"
                 }
             }
         )
